@@ -26,7 +26,7 @@ const Faq = () => {
         return;
       }
 
-      const response = await fetch("http://157.173.222.27:3008/api/v1/faq/get-all", {
+      const response = await fetch("https://golfserver.appsxperts.live/api/faq/get-all", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -105,7 +105,7 @@ const Faq = () => {
         return;
       }
   
-      const response = await fetch("http://157.173.222.27:3008/api/v1/faq/add-new", {
+      const response = await fetch("https://golfserver.appsxperts.live/api/faq/add-new", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -189,7 +189,7 @@ const Faq = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await fetch(`http://157.173.222.27:3008/api/v1/faq/delete/${id}`, {
+          const response = await fetch(`https://golfserver.appsxperts.live/api/faq/delete/${id}`, {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",

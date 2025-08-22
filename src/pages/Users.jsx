@@ -183,7 +183,7 @@ const Users = () => {
 
     try {
       const response = await axios.put(
-        `http://157.173.222.27:3008/api/v1/user/update-status/${id}`,
+        `https://golfserver.appsxperts.live/api/user/update-status/${id}`,
         { isActive: newStatus }, {
         headers: {
           Authorization: `Bearer ${authTokenExist}`,

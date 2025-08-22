@@ -2,7 +2,7 @@ import axios from "axios";
 
 const userExists = localStorage.getItem("admin");
 const authTokenExist = localStorage.getItem("authToken");
-const API_URL = `http://157.173.222.27:3008/api/v1`
+const API_URL = `https://golfserver.appsxperts.live/api`
 
 export const getAllServices = async () => {
     try {
