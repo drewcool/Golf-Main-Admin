@@ -4,7 +4,8 @@ const userExists = localStorage.getItem("admin");
 const authTokenExist = localStorage.getItem("authToken");
 // const API_URL = `http://localhost:7500/api`
 // const API_URL = `http://157.173.222.27:7500/api`
-const API_URL = `https://golfserver.appsxperts.live/api`
+  const API_URL = `http://13.51.189.31:5000/api`
+// const API_URL = `https://golfserver.appsxperts.live/api`
 
 export const getUserLogin = async (data) => {
     try {

@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const token = localStorage.getItem("authToken");
-const API_URL = `https://golfserver.appsxperts.live/api`;
+// const API_URL = `https://golfserver.appsxperts.live/api`;
+const API_URL = `http://13.51.189.31:5000/api`;
 
 // Save holes for a course
 export const saveCourseHoles = async (courseId, holes) => {
