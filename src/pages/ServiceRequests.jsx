@@ -51,8 +51,7 @@ const ServiceRequests = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      // const response = await axios.get("https://golfserver.appsxperts.live/api/service/get-all");
-      const response = await axios.get("http://13.51.189.31:5000/api/service/get-all");
+             const response = await axios.get("http://13.51.189.31:5001/api/service/get-all");
       console.log("Resp", response)
       setTableData(response.data?.services || []);
     } catch (error) {
@@ -119,8 +118,7 @@ const ServiceRequests = () => {
             return;
           }
   
-          // await axios.delete(`https://golfserver.appsxperts.live/api/service/delete/${id}`, {
-        await axios.delete(`http://13.51.189.31:5000/api/service/delete/${id}`, {
+                     await axios.delete(`http://13.51.189.31:5001/api/service/delete/${id}`, {
             headers: {
               Authorization: `Bearer ${authToken}`,
             },

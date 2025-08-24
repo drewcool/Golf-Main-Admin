@@ -183,7 +183,7 @@ const Users = () => {
 
     try {
       const response = await axios.put(
-        `http://13.51.189.31:5000/api/user/update-status/${id}`,
+                 `http://13.51.189.31:5001/api/user/update-status/${id}`,
         { isActive: newStatus }, {
         headers: {
           Authorization: `Bearer ${authTokenExist}`,

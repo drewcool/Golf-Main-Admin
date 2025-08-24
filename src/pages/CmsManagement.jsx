@@ -180,8 +180,7 @@ const CmsManagement = () => {
 
   const fetchPrivacy = async () => {
     try {
-      // const res = await axios.get("https://golfserver.appsxperts.live/api/privacy/get/67c4a3fc79e4c95fba108799")
-      const res = await axios.get("http://13.51.189.31:5000/api/privacy/get/67c4a3fc79e4c95fba108799")
+             const res = await axios.get("http://13.51.189.31:5001/api/privacy/get/67c4a3fc79e4c95fba108799")
       console.log("res", res);
       setPrivacyData({
         title: "Privacy Policy",
