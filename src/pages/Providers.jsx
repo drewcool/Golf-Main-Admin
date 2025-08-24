@@ -63,7 +63,7 @@ const Providers = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        "https://golfserver.appsxperts.live/api/service-provider/get-all",
+        "http://13.51.189.31:5000/api/service-provider/get-all",
         {
           headers: {
             Authorization: `Bearer ${authTokenExist}`,
@@ -183,7 +183,8 @@ const Providers = () => {
       }
 
       const response = await fetch(
-        `https://golfserver.appsxperts.live/api/service-provider/update-status/${id}`,
+        // `https://golfserver.appsxperts.live/api/service-provider/update-status/${id}`,
+        `http://13.51.189.31:5000/api/service-provider/update-status/${id}`,
         {
           method: "PUT",
           headers: {
