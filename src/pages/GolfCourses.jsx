@@ -80,15 +80,12 @@ const GolfCourses = () => {
     try {
       const res = await getGolfCoursesList();
       console.log("Response", res);
-      // Add safety check - ensure res is an array
-      setTableData(Array.isArray(res) ? res : []);
+      setTableData(res);
     } catch (error) {
-      console.error("Error in fetchData:", error);
-      setTableData([]); // Set empty array on error
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: "Failed to fetch golf courses data.",
+        text: "Failed to fetch user data.",
       });
     } finally {
       setLoading(false);
@@ -157,12 +154,9 @@ const GolfCourses = () => {
     }
   };
 
-  // Add safety check to ensure tableData is an array before filtering
-  const filteredData = (tableData && Array.isArray(tableData)) 
-    ? tableData.filter((user) =>
-        user.name && user.name.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    : [];
+  const filteredData = tableData.filter((user) =>
+    user.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
   const paginatedData = filteredData.slice(

@@ -63,7 +63,9 @@ const Providers = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-                 "http://13.51.189.31:5001/api/service-provider/get-all",
+                 "https://golfserver.appsxperts.live/api/service-provider/get-all",
+         // "http://13.51.189.31:5001/api/service-provider/get-all",
+         // "http://localhost:5001/api/service-provider/get-all",
         {
           headers: {
             Authorization: `Bearer ${authTokenExist}`,
@@ -183,7 +185,9 @@ const Providers = () => {
       }
 
       const response = await fetch(
-                 `http://13.51.189.31:5001/api/service-provider/update-status/${id}`,
+                 `https://golfserver.appsxperts.live/api/service-provider/update-status/${id}`,
+         // `http://13.51.189.31:5001/api/service-provider/update-status/${id}`,
+         // `http://localhost:5001/api/service-provider/update-status/${id}`,
         {
           method: "PUT",
           headers: {

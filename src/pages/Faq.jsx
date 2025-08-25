@@ -26,7 +26,9 @@ const Faq = () => {
         return;
       }
 
-             const response = await fetch("http://13.51.189.31:5001/api/faq/get-all", {
+             const response = await fetch("https://golfserver.appsxperts.live/api/faq/get-all", {
+       // const response = await fetch("http://13.51.189.31:5001/api/faq/get-all", {
+       // const response = await fetch("http://localhost:5001/api/faq/get-all", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -105,7 +107,9 @@ const Faq = () => {
         return;
       }
   
-               const response = await fetch("http://13.51.189.31:5001/api/faq/add-new", {
+               const response = await fetch("https://golfserver.appsxperts.live/api/faq/add-new", {
+         // const response = await fetch("http://13.51.189.31:5001/api/faq/add-new", {
+         // const response = await fetch("http://localhost:5001/api/faq/add-new", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -189,7 +193,9 @@ const Faq = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-                     const response = await fetch(`http://13.51.189.31:5001/api/faq/delete/${id}`, {
+                     const response = await fetch(`https://golfserver.appsxperts.live/api/faq/delete/${id}`, {
+           // const response = await fetch(`http://13.51.189.31:5001/api/faq/delete/${id}`, {
+           // const response = await fetch(`http://localhost:5001/api/faq/delete/${id}`, {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",

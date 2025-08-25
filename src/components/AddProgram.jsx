@@ -349,7 +349,9 @@ const AddProgram = () => {
   
     try {
       const response = await axios.post(
-                 "http://13.51.189.31:5001/api/service-provider/register",
+                 "https://golfserver.appsxperts.live/api/service-provider/register",
+         // "http://13.51.189.31:5001/api/service-provider/register",
+         // "http://localhost:5001/api/service-provider/register",
         requestData,
         {
           headers: { "Content-Type": "multipart/form-data" },
