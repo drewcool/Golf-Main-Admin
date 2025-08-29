@@ -34,13 +34,13 @@ export const addCourseApi = async (data) => {
       });
   
       if (res.data.status) {
-        console.log("Lesson Added:", res.data);
+        console.log("Course Added:", res.data);
         return res.data;
       } else {
-        throw new Error(res.data.message || "Lesson add failed");
+        throw new Error(res.data.message || "Course add failed");
       }
     } catch (error) {
-      throw new Error(error.response?.data?.message || "Lesson add failed.");
+      throw new Error(error.response?.data?.message || "Course add failed.");
     }
   };
 
@@ -53,10 +53,10 @@ export const addCourseApi = async (data) => {
       });
   
       if (res.data.status) {
-        console.log("Lesson Added:", res.data);
+        console.log("Course Deleted:", res.data);
         return res.data;
       } else {
-        throw new Error(res.data.message || "delete failed");
+        throw new Error(res.data.message || "Course failed");
       }
     } catch (error) {
       throw new Error(error.response?.data?.message || "delete failed.");

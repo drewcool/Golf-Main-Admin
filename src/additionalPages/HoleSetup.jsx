@@ -28,10 +28,10 @@ const buildDefaultHole = (holeNumber, courseId, courseName) => ({
     coordinates: []
   },
   teeBoxes: [
-    { teeType: "pro", color: "black", par: 4, yards: "", meters: "", hcp: "", hex: "#000000" },
-    { teeType: "champion", color: "blue", par: 4, yards: "", meters: "", hcp: "", hex: "#0000ff" },
-    { teeType: "men", color: "gold", par: 4, yards: "", meters: "", hcp: "", hex: "#D4A017" },
-    { teeType: "women", color: "red", par: 4, yards: "", meters: "", hcp: "", hex: "#ff0000" },
+    { teeType: "pro", color: "black", par: 4, yards: "", meters: "", hcp: "", hex: "#000000", lat: "", lng: "" },
+    { teeType: "champion", color: "blue", par: 4, yards: "", meters: "", hcp: "", hex: "#0000ff", lat: "", lng: "" },
+    { teeType: "men", color: "gold", par: 4, yards: "", meters: "", hcp: "", hex: "#D4A017", lat: "", lng: "" },
+    { teeType: "women", color: "red", par: 4, yards: "", meters: "", hcp: "", hex: "#ff0000", lat: "", lng: "" },
   ],
 });
 
@@ -159,7 +159,7 @@ const HoleSetup = () => {
       const hole = { ...copy[holeIndex] };
       hole.teeBoxes = [
         ...hole.teeBoxes,
-        { teeType: "", color: "", par: "", yards: "", meters: "", hcp: "", hex: "" },
+        { teeType: "", color: "", par: "", yards: "", meters: "", hcp: "", hex: "", lat: "", lng: "" },
       ];
       copy[holeIndex] = hole;
       return copy;
@@ -403,6 +403,26 @@ const HoleSetup = () => {
                             value={tee.hex}
                             onChange={(e) => updateTeeBoxField(holeIndex, teeIndex, "hex", e.target.value)}
                             placeholder="#RRGGBB"
+                          />
+                        </div>
+                        <div className="col-md-3">
+                          <label className="form-label">Lat</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            value={tee.lat}
+                            onChange={(e) => updateTeeBoxField(holeIndex, teeIndex, "lat", e.target.value)}
+                            placeholder="e.g. 37.7749"
+                          />
+                        </div>
+                        <div className="col-md-3">
+                          <label className="form-label">Lng</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            value={tee.lng}
+                            onChange={(e) => updateTeeBoxField(holeIndex, teeIndex, "lng", e.target.value)}
+                            placeholder="e.g. -122.4194"
                           />
                         </div>
                         <div className="col-md-12 d-flex justify-content-end">

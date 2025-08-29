@@ -207,6 +207,51 @@ const ViewCourseDetails = () => {
           </div>
         </div>
 
+        {/* Tee Details (from Add Course) */}
+        {Array.isArray(course.teeDetails) && course.teeDetails.length > 0 && (
+          <div className="row">
+            <div className="col-12 mb-4">
+              <div className="card">
+                <div className="card-header" style={{ background: "#00489d", color: "#fff" }}>
+                  <h5 className="mb-0">Tee Details</h5>
+                </div>
+                <div className="card-body">
+                  <div className="table-responsive">
+                    <table className="table table-sm table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Color</th>
+                          <th>Hex</th>
+                          <th>Distance (yards)</th>
+                          <th>Par</th>
+                          <th>Man</th>
+                          <th>Woman</th>
+                          <th>Champion</th>
+                          <th>Pro</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {course.teeDetails.map((t, i) => (
+                          <tr key={i}>
+                            <td>{t.color}</td>
+                            <td>{t.colorCode}</td>
+                            <td>{t.distanceInYards}</td>
+                            <td>{t.par}</td>
+                            <td>{t.manScore ?? '-'}</td>
+                            <td>{t.womanScore ?? '-'}</td>
+                            <td>{t.championScore ?? '-'}</td>
+                            <td>{t.proScore ?? '-'}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Holes Information */}
         <div className="row">
           <div className="col-12">

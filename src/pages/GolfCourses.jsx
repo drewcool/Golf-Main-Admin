@@ -246,7 +246,7 @@ const GolfCourses = () => {
                     <div className="loader"></div>
                   </div>
                 ) : (
-                  <div className="table-responsive mt-2">paginatedData
+                  <div className="table-responsive mt-2">
                     <table className="table table-bordered table-hover dt-responsive">
                       <thead>
                         <tr>
@@ -325,8 +325,8 @@ const GolfCourses = () => {
                     </table>
 
 
-                    <div className="pagination mt-4 mb-2 d-flex align-items-start justify-content-between">
-                      <span className="pagination-info">
+                    <div className="pagination mt-4 mb-2 d-flex align-items-center justify-content-between flex-wrap">
+                      <span className="pagination-info mb-2 mb-sm-0">
                         Showing {currentPage * itemsPerPage + 1} to{" "}
                         {Math.min(
                           (currentPage + 1) * itemsPerPage,
@@ -334,14 +334,7 @@ const GolfCourses = () => {
                         )}{" "}
                         of {filteredData.length} entries
                       </span>
-                      <div
-                        className="page"
-                        style={{
-                          position: "absolute",
-                          right: "12px",
-                          margin: "-10px 0px 0px 0px",
-                        }}
-                      >
+                      <div className="page d-flex align-items-center gap-1 ms-auto flex-wrap">
                         <button
                           style={{
                             padding: "7px 10px",

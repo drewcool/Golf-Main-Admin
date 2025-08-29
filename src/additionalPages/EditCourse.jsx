@@ -27,6 +27,15 @@ const EditCourse = () => {
 
   const [loading, setLoading] = useState(false);
 
+  // Tee details state (mirror AddCourses)
+  const defaultTees = [
+    { label: "Man", enabled: false, color: "", colorCode: "", distanceInYards: "", manScore: "", womanScore: "", championScore: "", proScore: "", par: "" },
+    { label: "Woman", enabled: false, color: "", colorCode: "", distanceInYards: "", manScore: "", womanScore: "", championScore: "", proScore: "", par: "" },
+    { label: "Champion", enabled: false, color: "", colorCode: "", distanceInYards: "", manScore: "", womanScore: "", championScore: "", proScore: "", par: "" },
+    { label: "Pro", enabled: false, color: "", colorCode: "", distanceInYards: "", manScore: "", womanScore: "", championScore: "", proScore: "", par: "" },
+  ];
+  const [teeDetails, setTeeDetails] = useState(defaultTees);
+
   useEffect(() => {
     if (course) {
       setCourseForm({
@@ -41,6 +50,22 @@ const EditCourse = () => {
         image: null,
         gallery: [],
       });
+      // Seed teeDetails from course if available
+      if (Array.isArray(course.teeDetails) && course.teeDetails.length > 0) {
+        const seeded = course.teeDetails.map((t) => ({
+          label: t.label || t.color || "Tee",
+          enabled: true,
+          color: t.color || "",
+          colorCode: t.colorCode || "",
+          distanceInYards: t.distanceInYards ?? "",
+          manScore: t.manScore ?? "",
+          womanScore: t.womanScore ?? "",
+          championScore: t.championScore ?? "",
+          proScore: t.proScore ?? "",
+          par: t.par ?? "",
+        }));
+        setTeeDetails(seeded);
+      }
     }
 
     $(".dropify").dropify();
@@ -100,6 +125,21 @@ const EditCourse = () => {
           formData.append(key, courseForm[key]);
         }
       });
+
+      // Append teeDetails
+      const enabledTees = teeDetails
+        .filter(t => t.enabled)
+        .map(t => ({
+          color: t.color,
+          colorCode: t.colorCode,
+          distanceInYards: t.distanceInYards !== "" ? Number(t.distanceInYards) : undefined,
+          manScore: t.manScore !== "" ? Number(t.manScore) : undefined,
+          womanScore: t.womanScore !== "" ? Number(t.womanScore) : undefined,
+          championScore: t.championScore !== "" ? Number(t.championScore) : undefined,
+          proScore: t.proScore !== "" ? Number(t.proScore) : undefined,
+          par: t.par !== "" ? Number(t.par) : undefined,
+        }));
+      formData.append("teeDetails", JSON.stringify(enabledTees));
 
       const res = await updateCourseApi(formData);
 
@@ -178,6 +218,86 @@ const EditCourse = () => {
                     />
                   </div>
                 ))}
+
+                {/* Tee Details editor */}
+                <div className="mb-4">
+                  <label className="form-label d-flex align-items-center justify-content-between">
+                    <span className="fw-bold">Tee Details</span>
+                  </label>
+                  {teeDetails.map((tee, idx) => (
+                    <div key={idx} className="border rounded p-3 mb-3">
+                      <div className="d-flex align-items-center justify-content-between mb-2">
+                        <div className="d-flex align-items-center gap-2">
+                          <input className="form-check-input me-2" type="checkbox" id={`tee-enabled-${idx}`} checked={tee.enabled} onChange={(e) => setTeeDetails(prev => prev.map((t,i) => i===idx ? { ...t, enabled: e.target.checked } : t))} />
+                          <input type="text" className="form-control form-control-sm" style={{ maxWidth: 220 }} value={tee.label} onChange={(e) => setTeeDetails(prev => prev.map((t,i) => i===idx ? { ...t, label: e.target.value } : t))} placeholder="Tee name" />
+                        </div>
+                      </div>
+                      {tee.enabled && (
+                        <div className="row g-3">
+                          <div className="col-md-2">
+                            <label className="form-label">Color</label>
+                            <select className="form-select" value={tee.color} onChange={(e) => setTeeDetails(prev => prev.map((t,i) => i===idx ? { ...t, color: e.target.value } : t))}>
+                              <option value="">Select</option>
+                              <option value="red">Red</option>
+                              <option value="blue">Blue</option>
+                              <option value="white">White</option>
+                              <option value="black">Black</option>
+                              <option value="gold">Gold</option>
+                            </select>
+                          </div>
+                          <div className="col-md-2">
+                            <label className="form-label">Hex</label>
+                            <input type="text" className="form-control" placeholder="#RRGGBB" value={tee.colorCode} onChange={(e) => setTeeDetails(prev => prev.map((t,i) => i===idx ? { ...t, colorCode: e.target.value } : t))} />
+                          </div>
+                          <div className="col-md-2">
+                            <label className="form-label">Distance (yards)</label>
+                            <input type="number" className="form-control" value={tee.distanceInYards} onChange={(e) => setTeeDetails(prev => prev.map((t,i) => i===idx ? { ...t, distanceInYards: e.target.value } : t))} />
+                          </div>
+                          <div className="col-md-2">
+                            <label className="form-label">Par</label>
+                            <input type="number" className="form-control" value={tee.par} onChange={(e) => setTeeDetails(prev => prev.map((t,i) => i===idx ? { ...t, par: e.target.value } : t))} />
+                          </div>
+                          {tee.label.toLowerCase() === 'man' && (
+                            <div className="col-md-2">
+                              <label className="form-label">Man Score</label>
+                              <input type="number" className="form-control" value={tee.manScore} onChange={(e) => setTeeDetails(prev => prev.map((t,i) => i===idx ? { ...t, manScore: e.target.value } : t))} />
+                            </div>
+                          )}
+                          {tee.label.toLowerCase() === 'woman' && (
+                            <div className="col-md-2">
+                              <label className="form-label">Woman Score</label>
+                              <input type="number" className="form-control" value={tee.womanScore} onChange={(e) => setTeeDetails(prev => prev.map((t,i) => i===idx ? { ...t, womanScore: e.target.value } : t))} />
+                            </div>
+                          )}
+                          {tee.label.toLowerCase() === 'champion' && (
+                            <div className="col-md-2">
+                              <label className="form-label">Champion Score</label>
+                              <input type="number" className="form-control" value={tee.championScore} onChange={(e) => setTeeDetails(prev => prev.map((t,i) => i===idx ? { ...t, championScore: e.target.value } : t))} />
+                            </div>
+                          )}
+                          {tee.label.toLowerCase() === 'pro' && (
+                            <div className="col-md-2">
+                              <label className="form-label">Pro Score</label>
+                              <input type="number" className="form-control" value={tee.proScore} onChange={(e) => setTeeDetails(prev => prev.map((t,i) => i===idx ? { ...t, proScore: e.target.value } : t))} />
+                            </div>
+                          )}
+                          {!(['man','woman','champion','pro'].includes(tee.label.toLowerCase())) && (
+                            <>
+                              <div className="col-md-2">
+                                <label className="form-label">Champion Score</label>
+                                <input type="number" className="form-control" value={tee.championScore} onChange={(e) => setTeeDetails(prev => prev.map((t,i) => i===idx ? { ...t, championScore: e.target.value } : t))} />
+                              </div>
+                              <div className="col-md-2">
+                                <label className="form-label">Pro Score</label>
+                                <input type="number" className="form-control" value={tee.proScore} onChange={(e) => setTeeDetails(prev => prev.map((t,i) => i===idx ? { ...t, proScore: e.target.value } : t))} />
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
 
                 <div className="mb-3">
                   <label className="form-label">Description</label>
